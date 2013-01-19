@@ -1,0 +1,90 @@
+/** Copyleft (ɔ) meh. - http://meh.schizofreni.co
+ *
+ * This file is part of Gullinkambi - https://github.com/meh/Gullinkambi
+ *
+ * Gullinkambi is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Gullinkambi is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Gullinkambi. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#ifndef _GULLINKAMBI_SHADER_MANAGER_H
+#define _GULLINKAMBI_SHADER_MANAGER_H
+
+#include <string>
+#include <functional>
+#include <map>
+#include <vector>
+#include <typeinfo>
+
+#include <gullinkambi/gl>
+#include <gullinkambi/math>
+#include <gullinkambi/utility>
+
+namespace gullinkambi
+{
+	class shader_manager
+	{
+		public:
+			struct shader final
+			{
+				template <class Function>
+				shader (std::vector<std::string> attrs,
+								std::map<std::string, std::string> source,
+								Function lambda);
+
+				~shader (void);
+
+				template <typename ...Args>
+				void call (Args... args);
+
+				void uniform (std::string name, math::vector<1, float> data);
+				void uniform (std::string name, math::vector<2, float> data);
+				void uniform (std::string name, math::vector<3, float> data);
+				void uniform (std::string name, math::vector<4, float> data);
+
+				void uniform (std::string name, math::matrix<4, 4, float> data);
+
+				GLuint id;
+
+				std::map<std::string, GLint>       attributes;
+				std::map<std::string, std::string> source;
+
+				const std::type_info* signature;
+				void*                 function;
+			};
+
+		public:
+			shader_manager (void);
+			~shader_manager (void);
+
+			template <typename Function>
+			shader* make (std::vector<std::string> attributes,
+			              std::map<std::string, std::string> source,
+			              Function lambda);
+
+			template <typename Function>
+			shader& add (std::string name,
+			             std::vector<std::string> attributes,
+			             std::map<std::string, std::string> source,
+			             Function lambda);
+
+			template <typename ...Args>
+			shader& use (std::string name, Args... args);
+
+		private:
+			std::map<std::string, shader*> _shaders;
+	};
+}
+
+#include "shader_manager.tpp"
+
+#endif

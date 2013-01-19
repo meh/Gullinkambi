@@ -1,0 +1,125 @@
+/** Copyleft (ɔ) meh. - http://meh.schizofreni.co
+ *
+ * This file is part of Gullinkambi - https://github.com/meh/Gullinkambi
+ *
+ * Gullinkambi is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Gullinkambi is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Gullinkambi. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#ifndef _GULLINKAMBI_GL_H
+#define _GULLINKAMBI_GL_H
+
+#include <gullinkambi/math>
+
+#include <GL/glew.h>
+#include <GL/gl.h>
+#include <GL/glut.h>
+
+#include <string>
+#include <map>
+#include <vector>
+#include <stdexcept>
+
+namespace gullinkambi
+{
+	namespace gl
+	{
+		namespace window
+		{
+			void create (int* argc, char* argv[],
+			             std::map<std::string, std::vector<int>> attributes,
+			             std::string name) throw (std::invalid_argument);
+
+			template <typename Function>
+			void loop (Function setup);
+
+			namespace callbacks
+			{
+				void resize (int width, int height);
+				void render (void);
+			}
+
+			template <typename Function>
+			void callback (std::string name, Function lambda);
+		}
+
+		namespace extensions
+		{
+			void setup (void) throw (std::runtime_error);
+		}
+
+		void viewport (GLsizei width, GLsizei height);
+		void viewport (GLint x, GLint y, GLsizei width, GLsizei height);
+
+		namespace clear
+		{
+			void color (GLclampf red, GLclampf green, GLclampf blue);
+			void color (GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
+		}
+
+		namespace buffers
+		{
+			void swap (void);
+
+			void clear (GLbitfield mask);
+		}
+
+		namespace program
+		{
+			namespace shader
+			{
+				GLuint create (GLenum value);
+				void   destroy (GLuint id);
+				GLuint load (GLuint id, std::string source);
+				GLuint compile (GLuint id);
+				GLuint make (GLenum value, std::string source);
+			}
+
+			namespace uniform
+			{
+				GLint location (GLuint program, std::string name);
+
+				void set (GLint location, GLfloat a);
+				void set (GLint location, GLfloat a, GLfloat b);
+				void set (GLint location, GLfloat a, GLfloat b, GLfloat c);
+				void set (GLint location, GLfloat a, GLfloat b, GLfloat c, GLfloat d);
+
+				void set (GLint location, GLint a);
+				void set (GLint location, GLint a, GLint b);
+				void set (GLint location, GLint a, GLint b, GLint c);
+				void set (GLint location, GLint a, GLint b, GLint c, GLint d);
+
+				void set (GLint location, math::matrix<2, 2, float> data);
+				void set (GLint location, math::matrix<3, 3, float> data);
+				void set (GLint location, math::matrix<4, 4, float> data);
+
+				void set (GLint location, math::matrix<2, 3, float> data);
+				void set (GLint location, math::matrix<3, 2, float> data);
+				void set (GLint location, math::matrix<2, 4, float> data);
+				void set (GLint location, math::matrix<4, 2, float> data);
+				void set (GLint location, math::matrix<3, 4, float> data);
+				void set (GLint location, math::matrix<4, 3, float> data);
+			}
+
+			GLuint make (std::map<std::string, std::string> source);
+			GLuint make (std::map<std::string, GLuint> id);
+			void   destroy (GLuint program);
+
+			void bind (GLuint program, GLuint index, std::string name);
+		}
+	}
+}
+
+#include "gl.tpp"
+
+#endif

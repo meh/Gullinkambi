@@ -1,0 +1,84 @@
+/** Copyleft (ɔ) meh. - http://meh.schizofreni.co
+ *
+ * This file is part of Gullinkambi - https://github.com/meh/Gullinkambi
+ *
+ * Gullinkambi is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Gullinkambi is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Gullinkambi. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#ifndef _GULLINKAMBI_MATH_VECTOR_H
+#define _GULLINKAMBI_MATH_VECTOR_H
+
+#include <stdexcept>
+#include <type_traits>
+
+namespace gullinkambi
+{
+	namespace math
+	{
+		template<int Columns, int Rows, typename Type>
+		class matrix;
+
+		template <int Size = 3, typename Type = float>
+		class vector
+		{
+			static_assert(Size >= 1 && Size <= 4, "only 1, 2, 3, or 4 elements vectors");
+
+			static_assert(std::is_same<float, Type>::value ||
+			              std::is_same<double, Type>::value ||
+			              std::is_same<int, Type>::value, "only float, double and int");
+
+			public:
+				vector (void);
+
+				vector (const vector<Size, Type>& from);
+
+				vector (std::initializer_list<Type> list) throw (std::invalid_argument);
+
+				vector (Type* data);
+
+				~vector (void);
+
+				vector<Size, Type>& operator = (const Type* data);
+
+				vector<Size, Type>& operator = (std::initializer_list<Type> list) throw (std::invalid_argument);
+
+				Type& operator [] (int index) const;
+
+				vector<Size, Type>  operator +  (const vector<Size, Type>& other);
+				vector<Size, Type>& operator += (const vector<Size, Type>& other);
+
+				vector<Size, Type>  operator -  (const vector<Size, Type>& other);
+				vector<Size, Type>& operator -= (const vector<Size, Type>& other);
+
+				vector<Size, Type>  operator %  (Type scale);
+				vector<Size, Type>& operator %= (Type scale);
+
+				Type operator ~ (void);
+
+				vector<Size, Type> operator ! (void);
+
+				Type operator >> (vector<Size, Type>& other);
+
+				Type* operator & (void) const;
+
+			private:
+				Type* _data;
+				bool  _allocated;
+		};
+	}
+}
+
+#include "maths/vector.tpp"
+
+#endif

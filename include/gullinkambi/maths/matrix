@@ -1,0 +1,68 @@
+/** Copyleft (ɔ) meh. - http://meh.schizofreni.co
+ *
+ * This file is part of Gullinkambi - https://github.com/meh/Gullinkambi
+ *
+ * Gullinkambi is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Gullinkambi is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Gullinkambi. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#ifndef _GULLINKAMBI_MATH_MATRIX_H
+#define _GULLINKAMBI_MATH_MATRIX_H
+
+#include <stdexcept>
+
+namespace gullinkambi
+{
+	namespace math
+	{
+		template <int Size, typename Type>
+		class vector;
+
+		template <int Columns = 4, int Rows = 4, typename Type = float>
+		class matrix
+		{
+			static_assert(Columns >= 2 && Columns <= 4, "columns can only be 2, 3 and 4");
+
+			static_assert(Rows >= 2 && Rows <= 4, "rows can only be 2, 3 and 4");
+
+			static_assert(std::is_same<float, Type>::value ||
+			              std::is_same<double, Type>::value ||
+			              std::is_same<int, Type>::value, "only float, double and int");
+
+			public:
+				matrix (void);
+
+				matrix (const matrix<Columns, Rows, Type>& from);
+
+				matrix (Type* data);
+
+				matrix (std::initializer_list<std::initializer_list<Type>> list) throw (std::invalid_argument);
+
+				~matrix (void);
+
+				vector<Columns, Type>& operator [] (int index);
+
+				Type* operator & (void) const;
+
+			private:
+				Type* _data;
+				bool  _allocated;
+
+				vector<Columns, Type>* _vectors[Rows];
+		};
+	}
+}
+
+#include "maths/matrix.tpp"
+
+#endif
