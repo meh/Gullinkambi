@@ -89,15 +89,15 @@ namespace gullinkambi
 			{
 				GLint location (GLuint program, std::string name);
 
-				void set (GLint location, GLfloat a);
-				void set (GLint location, GLfloat a, GLfloat b);
-				void set (GLint location, GLfloat a, GLfloat b, GLfloat c);
-				void set (GLint location, GLfloat a, GLfloat b, GLfloat c, GLfloat d);
+				void set (GLint location, math::vector<1, float> data);
+				void set (GLint location, math::vector<2, float> data);
+				void set (GLint location, math::vector<3, float> data);
+				void set (GLint location, math::vector<4, float> data);
 
-				void set (GLint location, GLint a);
-				void set (GLint location, GLint a, GLint b);
-				void set (GLint location, GLint a, GLint b, GLint c);
-				void set (GLint location, GLint a, GLint b, GLint c, GLint d);
+				void set (GLint location, math::vector<1, int> data);
+				void set (GLint location, math::vector<2, int> data);
+				void set (GLint location, math::vector<3, int> data);
+				void set (GLint location, math::vector<4, int> data);
 
 				void set (GLint location, math::matrix<2, 2, float> data);
 				void set (GLint location, math::matrix<3, 3, float> data);

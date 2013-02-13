@@ -210,51 +210,51 @@ namespace gullinkambi
 				}
 
 				void
-				set (GLint location, GLfloat a)
+				set (GLint location, math::vector<1, float> data)
 				{
-					glUniform1f(location, a);
+					glUniform1fv(location, 1, &data);
 				}
 
 				void
-				set (GLint location, GLfloat a, GLfloat b)
+				set (GLint location, math::vector<2, float> data)
 				{
-					glUniform2f(location, a, b);
+					glUniform2fv(location, 1, &data);
 				}
 
 				void
-				set (GLint location, GLfloat a, GLfloat b, GLfloat c)
+				set (GLint location, math::vector<3, float> data)
 				{
-					glUniform3f(location, a, b, c);
+					glUniform3fv(location, 1, &data);
 				}
 
 				void
-				set (GLint location, GLfloat a, GLfloat b, GLfloat c, GLfloat d)
+				set (GLint location, math::vector<4, float> data)
 				{
-					glUniform4f(location, a, b, c, d);
+					glUniform4fv(location, 1, &data);
 				}
 
 				void
-				set (GLint location, GLint a)
+				set (GLint location, math::vector<1, int> data)
 				{
-					glUniform1i(location, a);
+					glUniform1iv(location, 1, &data);
 				}
 
 				void
-				set (GLint location, GLint a, GLint b)
+				set (GLint location, math::vector<2, int> data)
 				{
-					glUniform2i(location, a, b);
+					glUniform2iv(location, 1, &data);
 				}
 
 				void
-				set (GLint location, GLint a, GLint b, GLint c)
+				set (GLint location, math::vector<3, int> data)
 				{
-					glUniform3i(location, a, b, c);
+					glUniform3iv(location, 1, &data);
 				}
 
 				void
-				set (GLint location, GLint a, GLint b, GLint c, GLint d)
+				set (GLint location, math::vector<4, int> data)
 				{
-					glUniform4i(location, a, b, c, d);
+					glUniform4iv(location, 1, &data);
 				}
 
 				void

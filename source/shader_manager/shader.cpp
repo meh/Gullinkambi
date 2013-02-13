@@ -34,33 +34,101 @@ namespace gullinkambi
 	void
 	shader_manager::shader::uniform (std::string name, math::vector<1, float> data)
 	{
-		gl::program::uniform::set(gl::program::uniform::location(this->id, name),
-			data[0]);
+		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
 	}
 
 	void
 	shader_manager::shader::uniform (std::string name, math::vector<2, float> data)
 	{
-		gl::program::uniform::set(gl::program::uniform::location(this->id, name),
-			data[0], data[1]);
+		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
 	}
 
 	void
 	shader_manager::shader::uniform (std::string name, math::vector<3, float> data)
 	{
-		gl::program::uniform::set(gl::program::uniform::location(this->id, name),
-			data[0], data[1], data[2]);
+		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
 	}
 
 	void
 	shader_manager::shader::uniform (std::string name, math::vector<4, float> data)
 	{
-		gl::program::uniform::set(gl::program::uniform::location(this->id, name),
-			data[0], data[1], data[2], data[3]);
+		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
+	}
+
+	void
+	shader_manager::shader::uniform (std::string name, math::vector<1, int> data)
+	{
+		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
+	}
+
+	void
+	shader_manager::shader::uniform (std::string name, math::vector<2, int> data)
+	{
+		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
+	}
+
+	void
+	shader_manager::shader::uniform (std::string name, math::vector<3, int> data)
+	{
+		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
+	}
+
+	void
+	shader_manager::shader::uniform (std::string name, math::vector<4, int> data)
+	{
+		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
+	}
+
+	void
+	shader_manager::shader::uniform (std::string name, math::matrix<2, 2, float> data)
+	{
+		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
+	}
+
+	void
+	shader_manager::shader::uniform (std::string name, math::matrix<3, 3, float> data)
+	{
+		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
 	}
 
 	void
 	shader_manager::shader::uniform (std::string name, math::matrix<4, 4, float> data)
+	{
+		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
+	}
+
+	void
+	shader_manager::shader::uniform (std::string name, math::matrix<2, 3, float> data)
+	{
+		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
+	}
+
+	void
+	shader_manager::shader::uniform (std::string name, math::matrix<3, 2, float> data)
+	{
+		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
+	}
+
+	void
+	shader_manager::shader::uniform (std::string name, math::matrix<2, 4, float> data)
+	{
+		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
+	}
+
+	void
+	shader_manager::shader::uniform (std::string name, math::matrix<4, 2, float> data)
+	{
+		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
+	}
+
+	void
+	shader_manager::shader::uniform (std::string name, math::matrix<3, 4, float> data)
+	{
+		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
+	}
+
+	void
+	shader_manager::shader::uniform (std::string name, math::matrix<4, 3, float> data)
 	{
 		gl::program::uniform::set(gl::program::uniform::location(this->id, name), data);
 	}
