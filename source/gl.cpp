@@ -61,7 +61,7 @@ namespace gullinkambi
 				std::map<std::string, void*> closures;
 
 				template <typename Signature>
-				static
+				static inline
 				std::function<Signature>&
 				closure (std::string name)
 				{
